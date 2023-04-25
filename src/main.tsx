@@ -5,21 +5,22 @@ import {
   RouterProvider
 } from 'react-router-dom';
 import { Home, Crypto, Saved, Trending } from './pages';
+import { Routes } from './models';
 import './index.css';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: Routes.home,
     element: <Home />,
     children: [
       {
-        path: '/',
+        path: Routes.home,
         element: <Crypto />
       }, {
-        path: '/trending',
+        path: Routes.trending,
         element: <Trending />
       }, {
-        path: '/saved',
+        path: Routes.saved,
         element: <Saved />
       }
     ]
