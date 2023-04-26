@@ -1,8 +1,9 @@
-import { createContext, useState, useContext, Dispatch } from 'react';
+import { ICryptoData } from '@/models';
+import { createContext, useState, useContext, Dispatch, useLayoutEffect } from 'react';
 
 interface IContextProps{
-  coins: any[];
-  setCoins:Dispatch<React.SetStateAction<never[]>>
+  cryptoData: ICryptoData[];
+  setCryptoData:Dispatch<React.SetStateAction<never[]>>
 }
 
 type Props = {
@@ -10,15 +11,31 @@ type Props = {
 };
 
 const CryptoContext = createContext<IContextProps>({
-  coins: [],
-  setCoins: () => null
+  cryptoData: [],
+  setCryptoData: () => null
 });
 
 export const CryptoProvider = ({ children }:Props) => {
-  const [coins, setCoins] = useState([]);
+  const [cryptoData, setCryptoData] = useState([]);
+
+  async function getCryptoData () {
+    try {
+      const data = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en')
+        .then((res) => res.json());
+
+      setCryptoData(data);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  }
+
+  useLayoutEffect(() => {
+    getCryptoData();
+  }, []);
 
   return (
-    <CryptoContext.Provider value={{ coins, setCoins }}>
+    <CryptoContext.Provider value={{ cryptoData, setCryptoData }}>
       {children}
     </CryptoContext.Provider>
   );
