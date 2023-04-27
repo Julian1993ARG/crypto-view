@@ -1,6 +1,7 @@
 import { useCryptoContext } from '@/context';
 import submitIcon from '../assets/submit-icon.svg';
 import selectIcon from '../assets/select-icon.svg';
+import { symbols } from '@/models';
 
 export default function SetCurrency () {
   const optionSorts = [
@@ -35,8 +36,10 @@ export default function SetCurrency () {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const value = e.currentTarget.currency.value as string || 'usd';
-    setCurrency(value);
-    e.currentTarget.currency.value = '';
+    if (value.toUpperCase() in symbols) {
+      setCurrency(value);
+      e.currentTarget.currency.value = '';
+    }
   };
 
   const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
