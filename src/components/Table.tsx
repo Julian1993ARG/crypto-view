@@ -2,7 +2,7 @@ import { useCryptoContext } from '@/context';
 import { StartIconSVG } from '.';
 
 export default function Table () {
-  const { cryptoData } = useCryptoContext();
+  const { cryptoData, currency } = useCryptoContext();
   return (
     <div className='flex flex-col mt-9 border border-gray-100 rounded '>
       <table className='w-full table-auto'>
@@ -37,7 +37,7 @@ export default function Table () {
                 <td className='py-4'>{
                   Number(data.current_price).toLocaleString('en-US', {
                     style: 'currency',
-                    currency: 'USD'
+                    currency
                   })
                 }
                 </td>
