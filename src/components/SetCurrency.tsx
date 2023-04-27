@@ -1,14 +1,48 @@
 import { useCryptoContext } from '@/context';
 import submitIcon from '../assets/submit-icon.svg';
+import selectIcon from '../assets/select-icon.svg';
 
 export default function SetCurrency () {
-  const { setCurrency } = useCryptoContext();
+  const optionSorts = [
+    {
+      name: 'market cap desc',
+      value: 'market_cap_desc'
+    },
+    {
+      name: 'market cap asc',
+      value: 'market_cap_asc'
+    },
+    {
+      name: 'volume asc',
+      value: 'volume_asc'
+    },
+    {
+      name: 'volume desc',
+      value: 'volume_desc'
+    },
+    {
+      name: 'id asc',
+      value: 'id_asc'
+    },
+    {
+      name: 'id desc',
+      value: 'id_desc'
+    }
+  ];
+
+  const { setCurrency, setSortBy } = useCryptoContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const value = e.currentTarget.currency.value as string || 'usd';
     setCurrency(value);
     e.currentTarget.currency.value = '';
+  };
+
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    e.preventDefault();
+    const value = e.target.value;
+    setSortBy(value);
   };
 
   return (
@@ -34,7 +68,27 @@ export default function SetCurrency () {
         >
           <img src={submitIcon} alt='submit-icon' className='w-full h-auto' />
         </button>
+
       </form>
+
+      <label htmlFor='sort' className='relative flex justify-center items-center'>
+        <span className='font-bold mr-2'>sort by: </span>
+        <select
+          name='sort'
+          id='sort'
+          className='rounded bg-gray-200 text-base pl-2 pr-10 py-0.5 leading-4 capitalize focus:outline-0 '
+          onChange={handleSort}
+        >
+          {optionSorts.map((option, index) => (
+            <option key={index} value={option.value}>{option.name}</option>
+          ))}
+        </select>
+        <img
+          src={selectIcon}
+          alt='select Icon'
+          className='w-[1rem] h-auto absolute right-1 top-2 pointer-events-none'
+        />
+      </label>
 
     </div>
   );

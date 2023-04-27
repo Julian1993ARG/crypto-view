@@ -6,8 +6,6 @@ export default function Filters () {
 
       <Search />
       <SetCurrency />
-
-      <div>sorting</div>
     </div>
   );
 }
