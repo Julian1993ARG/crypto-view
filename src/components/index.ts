@@ -1,3 +1,4 @@
+export { default as CryptoDetails } from './CryptoDetails';
 export { default as Filters } from './Filters';
 export * from './Icons';
 export { default as Logo } from './Logo';

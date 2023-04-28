@@ -1,4 +1,5 @@
-import { ICoin, ICryptoData } from '@/models';
+/* eslint-disable no-console */
+import { ICoin, ICryptoData, ICoinData } from '@/models';
 import { createContext, useState, useContext, useLayoutEffect, Dispatch } from 'react';
 
 interface IContextProps{
@@ -9,6 +10,7 @@ interface IContextProps{
   page: number,
   totalPages: number,
   perPage: number,
+  coinData: ICoinData | null,
   getSearchResults: (query:string) => void,
   setCoinSearch: Dispatch<React.SetStateAction<string>>,
   setSearchData: Dispatch<React.SetStateAction<never[]>>,
@@ -16,7 +18,8 @@ interface IContextProps{
   setSortBy: Dispatch<React.SetStateAction<string>>,
   setPage: Dispatch<React.SetStateAction<number>>,
   resetFunction: () => void,
-  setPerPage: Dispatch<React.SetStateAction<number>>
+  setPerPage: Dispatch<React.SetStateAction<number>>,
+  getCoinData: (id:string) => void
 }
 
 type Props = {
@@ -31,6 +34,7 @@ const CryptoContext = createContext<IContextProps>({
   page: 1,
   totalPages: 1,
   perPage: 10,
+  coinData: null,
   getSearchResults: () => null,
   setCoinSearch: () => null,
   setSearchData: () => null,
@@ -38,7 +42,8 @@ const CryptoContext = createContext<IContextProps>({
   setSortBy: () => null,
   setPage: () => null,
   resetFunction: () => null,
-  setPerPage: () => null
+  setPerPage: () => null,
+  getCoinData: () => null
 });
 
 export const CryptoProvider = ({ children }:Props) => {
@@ -58,6 +63,8 @@ export const CryptoProvider = ({ children }:Props) => {
   const [totalPages, setTotalPages] = useState(1);
   // cant per page
   const [perPage, setPerPage] = useState(10);
+  // coinData is data from a only coin
+  const [coinData, setCoinData] = useState<ICoinData | null>(null);
 
   async function getCryptoData () {
     try {
@@ -92,6 +99,16 @@ export const CryptoProvider = ({ children }:Props) => {
     }
   }
 
+  async function getCoinData (coinId:string) {
+    try {
+      const data = await fetch(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=false`)
+        .then((res) => res.json());
+      setCoinData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const resetFunction = () => {
     setPage(1);
     setCoinSearch('');
@@ -106,7 +123,7 @@ export const CryptoProvider = ({ children }:Props) => {
   }, [coinSearch, currency, sortBy, page, perPage]);
 
   return (
-    <CryptoContext.Provider value={{ cryptoData, searchData, currency, sortBy, page, totalPages, perPage, getSearchResults, setCoinSearch, setSearchData, setCurrency, setSortBy, setPage, resetFunction, setPerPage }}>
+    <CryptoContext.Provider value={{ cryptoData, searchData, currency, sortBy, page, totalPages, perPage, coinData, getSearchResults, setCoinSearch, setSearchData, setCurrency, setSortBy, setPage, resetFunction, setPerPage, getCoinData }}>
       {children}
     </CryptoContext.Provider>
   );
