@@ -2,6 +2,7 @@ import { useCryptoContext } from '@/context';
 import submitIcon from '../assets/submit-icon.svg';
 import selectIcon from '../assets/select-icon.svg';
 import { symbols } from '@/models';
+import { ResetIcon } from './Icons';
 
 export default function SetCurrency () {
   const optionSorts = [
@@ -31,11 +32,11 @@ export default function SetCurrency () {
     }
   ];
 
-  const { setCurrency, setSortBy } = useCryptoContext();
+  const { setCurrency, setSortBy, resetFunction } = useCryptoContext();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const value = e.currentTarget.currency.value as string || 'usd';
+    const value = e.currentTarget.currency.value || 'usd';
     if (value.toUpperCase() in symbols) {
       setCurrency(value);
       e.currentTarget.currency.value = '';
@@ -92,6 +93,9 @@ export default function SetCurrency () {
           className='w-[1rem] h-auto absolute right-1 top-2 pointer-events-none'
         />
       </label>
+      <button className='w-[2rem] ml-4 hover:scale-110 transition-all relative right-0 top-0' onClick={resetFunction}>
+        <ResetIcon className='w-full h-full fill-cyan' />
+      </button>
 
     </div>
   );
