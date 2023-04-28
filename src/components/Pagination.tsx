@@ -46,7 +46,7 @@ const PerPage = () => {
 };
 
 export default function Pagination () {
-  const { page: currentPage, setPage: setCurrentPage, totalPages: totalNumber } = useCryptoContext();
+  const { page: currentPage, setPage: setCurrentPage, totalPages: totalNumber, cryptoData, perPage } = useCryptoContext();
 
   const next = () => {
     if (currentPage === totalNumber) return;
@@ -68,7 +68,7 @@ export default function Pagination () {
     else setCurrentPage(currentPage - 3);
   };
   return (
-    <div className='flex items-center'>
+    <div className={`flex items-center ${cryptoData.length < perPage && 'hidden'}`}>
       <PerPage />
       <ul className='flex items-center justify-end text-sm'>
         <li className='flex items-center'>

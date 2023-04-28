@@ -98,6 +98,7 @@ export const CryptoProvider = ({ children }:Props) => {
     setCurrency('usd');
     setSortBy('market_cap_desc');
     setPerPage(10);
+    setSearchData([]);
   };
 
   useLayoutEffect(() => {

@@ -4,7 +4,7 @@ export default {
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}'
   ],
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
   theme: {
     extend: {
       fontFamily: { nunito: 'Nunito' }
