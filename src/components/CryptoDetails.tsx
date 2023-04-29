@@ -36,6 +36,8 @@ export default function CryptoDetails () {
 
                 <PriceComponent price={Number(coinData.market_data.current_price[currency.toLowerCase()])} percentage={Number(coinData.market_data.price_change_percentage_24h)} currency={currency} />
 
+                <FullValuesComponent currency={currency} marketCap={Number(coinData.market_data.market_cap[currency.toLowerCase()])} filutedValuation={Number(coinData.market_data.fully_diluted_valuation[currency.toLowerCase()])} totalVolume={Number(coinData.market_data.total_volume[currency.toLocaleLowerCase()])} />
+
               </div>
               <div className='flex flex-col w-[55%] h-full pl-3 '>
                 right
@@ -77,4 +79,47 @@ const PriceComponent = ({ price, percentage, currency }: {price: number, percent
       </h2>
     </div>
   </div>
+);
+
+type FullValuesProps = {
+  currency: string,
+  marketCap: number
+  filutedValuation: number,
+  totalVolume: number
+}
+
+const FullValuesComponent = ({ currency, marketCap, filutedValuation, totalVolume }:FullValuesProps) => (
+  <>
+    <div className='flex w-full mt-4 justify-between'>
+      <div className='flex flex-col'>
+        <span className='text-sm capitalize text-gray-100'>Market Cap</span>
+        <h2 className='text-base font-bold'>{marketCap.toLocaleString('en-US', {
+          style: 'currency',
+          currency,
+          minimumFractionDigits: 0
+        })}
+        </h2>
+      </div>
+      <div className='flex flex-col'>
+        <span className='text-sm capitalize text-gray-100'>fully diluted valuations</span>
+        <h2 className='text-base font-bold'>{filutedValuation.toLocaleString('en-US', {
+          style: 'currency',
+          currency,
+          notation: 'compact'
+        })}
+        </h2>
+      </div>
+
+    </div>
+
+    <div className='flex flex-col w-full mt-4 justify-between'>
+      <span className='text-sm capitalize text-gray-100'>total volume</span>
+      <h2 className='text-base font-bold'>{totalVolume.toLocaleString('en-US', {
+        style: 'currency',
+        currency,
+        minimumFractionDigits: 0
+      })}
+      </h2>
+    </div>
+  </>
 );
