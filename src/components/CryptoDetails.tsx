@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import { useCryptoContext } from '@/context';
 import { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
@@ -37,6 +38,22 @@ export default function CryptoDetails () {
                 <PriceComponent price={Number(coinData.market_data.current_price[currency.toLowerCase()])} percentage={Number(coinData.market_data.price_change_percentage_24h)} currency={currency} />
 
                 <FullValuesComponent currency={currency} marketCap={Number(coinData.market_data.market_cap[currency.toLowerCase()])} filutedValuation={Number(coinData.market_data.fully_diluted_valuation[currency.toLowerCase()])} totalVolume={Number(coinData.market_data.total_volume[currency.toLocaleLowerCase()])} />
+
+                <HighLowIndicatorComponent
+                  currentprice={Number(coinData.market_data.current_price[currency.toLowerCase()])}
+                  high={Number(coinData.market_data.high_24h[currency.toLowerCase()])}
+                  low={Number(coinData.market_data.low_24h[currency.toLowerCase()])}
+                />
+
+                <RestValuesComponent currency={currency} low24hs={Number(coinData.market_data.low_24h[currency.toLowerCase()])} high24H={Number(coinData.market_data.high_24h[currency.toLowerCase()])} maxSupply={Number(coinData.market_data.max_supply)} circulatingSupply={Number(coinData.market_data.circulating_supply)} />
+
+                <LinksComponent
+                  negativePercentage={Number(coinData.sentiment_votes_down_percentage)}
+                  positivePercentage={Number(coinData.sentiment_votes_up_percentage)}
+                  link1={coinData.links?.homepage[0]}
+                  link2={coinData.links?.blockchain_site[0]}
+                  link3={coinData.links?.official_forum_url[0]}
+                />
 
               </div>
               <div className='flex flex-col w-[55%] h-full pl-3 '>
@@ -112,15 +129,19 @@ const FullValuesComponent = ({ currency, marketCap, filutedValuation, totalVolum
         })}
         </h2>
       </div>
-      <div className='flex flex-col'>
-        <span className='text-sm capitalize text-gray-100'>fully diluted valuations</span>
-        <h2 className='text-base font-bold'>{filutedValuation.toLocaleString('en-US', {
-          style: 'currency',
-          currency,
-          notation: 'compact'
-        })}
-        </h2>
-      </div>
+      {
+        filutedValuation
+          ? <div className='flex flex-col'>
+            <span className='text-sm capitalize text-gray-100'>fully diluted valuations</span>
+            <h2 className='text-base font-bold'>{filutedValuation.toLocaleString('en-US', {
+              style: 'currency',
+              currency,
+              notation: 'compact'
+            })}
+            </h2>
+            </div>
+          : null
+      }
 
     </div>
 
@@ -135,3 +156,113 @@ const FullValuesComponent = ({ currency, marketCap, filutedValuation, totalVolum
     </div>
   </>
 );
+
+type RestValuesProps = {
+  currency: string,
+  low24hs: number,
+  high24H: number,
+  maxSupply: number,
+  circulatingSupply: number
+}
+
+const RestValuesComponent = ({ currency, low24hs, high24H, maxSupply, circulatingSupply }:RestValuesProps) => (
+  <>
+
+    <div className='flex w-full mt-4 justify-between'>
+      <div className='flex flex-col'>
+        <span className='text-sm capitalize text-gray-100'>LOW 24H</span>
+        <h2 className='text-base font-bold'>{low24hs.toLocaleString('en-US', {
+          style: 'currency',
+          currency,
+          minimumFractionDigits: 5
+        })}
+        </h2>
+      </div>
+      <div className='flex flex-col'>
+        <span className='text-sm capitalize text-gray-100'>high 24H</span>
+        <h2 className='text-base font-bold'>{high24H.toLocaleString('en-US', {
+          style: 'currency',
+          currency,
+          minimumFractionDigits: 5
+        })}
+        </h2>
+      </div>
+    </div>
+
+    <div className='flex w-full mt-4 justify-between'>
+      <div className='flex flex-col'>
+        <span className='text-sm capitalize text-gray-100'>max supply</span>
+        <h2 className='text-base font-bold'>{maxSupply.toLocaleString('en-US', {
+          style: 'currency',
+          currency,
+          minimumFractionDigits: 0
+        })}
+        </h2>
+      </div>
+      <div className='flex flex-col'>
+        <span className='text-sm capitalize text-gray-100'>circulating supply</span>
+        <h2 className='text-base font-bold'>{circulatingSupply.toLocaleString('en-US', {
+          style: 'currency',
+          currency,
+          minimumFractionDigits: 0
+        })}
+        </h2>
+      </div>
+    </div>
+  </>
+);
+
+type LinksProps = {
+  positivePercentage: number,
+  negativePercentage: number,
+  link1: string,
+  link2: string,
+  link3: string
+}
+
+const LinksComponent = ({ positivePercentage, negativePercentage, link1 = '', link2 = '', link3 = '' }:LinksProps) => (
+  <div className='flex w-full mt-4 justify-between'>
+    <div className='flex flex-col'>
+      <a target='_blank' className='text-sm bg-gray-200 text-gray-100 px-1.5 py-0.5 rounded' href={link1} rel='noreferrer'>{link1.substring(0, 30)}</a>
+      <a target='_blank' className='text-sm my-1 bg-gray-200 text-gray-100 px-1.5 py-0.5 rounded' href={link2} rel='noreferrer'>{link2.substring(0, 30)}</a>
+      {
+        link3
+          ? <a target='_blank' className='text-sm bg-gray-200 text-gray-100 px-1.5 py-0.5 rounded' href={link3} rel='noreferrer'>{link3.substring(0, 30)}</a>
+          : null
+      }
+    </div>
+    <div className='flex flex-col content-start'>
+      <span className='text-sm capitalize text-gray-100 ml-2'>sentiment</span>
+
+      <div className='text-sm px-1 ml-2 my-1 font-medium flex items-center rounded uppercase bg-opacity-25 bg-green text-green '><span>{positivePercentage.toFixed(2)}%</span>
+        <SelectIcon className=' w-[1rem] ml-0.5 fill-green rotate-180' />
+      </div>
+
+      <div className='text-sm px-1 ml-2 my-1 font-medium flex items-center rounded uppercase bg-opacity-25 bg-red text-red '><span>{negativePercentage.toFixed(2)}%</span>
+        <SelectIcon className=' w-[1rem] ml-0.5 fill-red ' />
+      </div>
+    </div>
+
+  </div>
+);
+
+type HighLowIndicatorProps = {
+  currentprice: number,
+  high: number,
+  low: number
+}
+
+const HighLowIndicatorComponent = ({ currentprice, high, low }: HighLowIndicatorProps) => {
+  const greenPercentage = Math.ceil((currentprice - low) / (high - low) * 100);
+  const redPercentage = 100 - greenPercentage;
+  return (
+
+    <div className='flex w-full mt-4 justify-between'>
+      <>
+        <span className='bg-red h-1.5 rounded-l-lg w-[50%]' style={{ width: `${redPercentage}%` }}>&nbsp;</span>
+        <span className='bg-green h-1.5 rounded-r-lg w-[50%]' style={{ width: `${greenPercentage}%` }}>&nbsp;</span>
+
+      </>
+    </div>
+  );
+};
