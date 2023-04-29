@@ -1,5 +1,6 @@
 import { useCryptoContext } from '@/context';
 import { StartIconSVG, Pagination } from '.';
+import { Link } from 'react-router-dom';
 
 export default function Table () {
   const { cryptoData, currency } = useCryptoContext();
@@ -32,9 +33,17 @@ export default function Table () {
                     alt='coin image'
                     className='w-[1.2rem] h-[1.2rem] mx-1.5'
                   />
-                  <span>{data.symbol}</span>
+                  <span>
+                    <Link to={`/${data.id}`} className='cursor-pointer'>
+                      {data.symbol}
+                    </Link>
+                  </span>
                 </td>
-                <td className='py-4'>{data.name}</td>
+                <td className='py-4'>
+                  <Link to={`/${data.id}`} className='cursor-pointer'>
+                    {data.name}
+                  </Link>
+                </td>
                 <td className='py-4'>{
                   Number(data.current_price).toLocaleString('en-US', {
                     style: 'currency',
