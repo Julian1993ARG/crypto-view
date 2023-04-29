@@ -51,7 +51,13 @@ export default function CryptoDetails () {
   );
 }
 
-const TitleComponent = ({ coinName, coinSymbol, coinLogo }: {coinName: string, coinSymbol: string, coinLogo:string}) => (
+type TitleProps = {
+  coinName: string,
+  coinSymbol: string,
+  coinLogo: string
+}
+
+const TitleComponent = ({ coinName, coinSymbol, coinLogo }: TitleProps) => (
   <div className='flex w-full items-center'>
     <img src={coinLogo} alt='coin icon' className='w-[3rem] h-[3rem] mx-1.5' />
     <h1 className='text-xl capitalize font-medium'>{coinName}</h1>
@@ -59,7 +65,13 @@ const TitleComponent = ({ coinName, coinSymbol, coinLogo }: {coinName: string, c
   </div>
 );
 
-const PriceComponent = ({ price, percentage, currency }: {price: number, percentage: number, currency:string}) => (
+type PriceProps = {
+  price: number,
+  percentage: number,
+  currency: string
+}
+
+const PriceComponent = ({ price, percentage, currency }: PriceProps) => (
   <div className='flex w-full mt-6 '>
     <div className='flex flex-col w-full'>
       <div className='flex justify-between '>
