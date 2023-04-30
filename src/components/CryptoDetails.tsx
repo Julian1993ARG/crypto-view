@@ -3,7 +3,7 @@ import { useCryptoContext } from '@/context';
 import { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';
-import { SelectIcon, Chart } from './';
+import { SelectIcon, Chart, FacebookIcon, GitHubIcon, RedditIcon, TwitterIcon } from './';
 
 export default function CryptoDetails () {
   const { getCoinData, coinData, currency } = useCryptoContext();
@@ -58,6 +58,22 @@ export default function CryptoDetails () {
               </div>
               <div className='flex flex-col w-[55%] h-full pl-3 '>
                 <Chart coinId={coinId} />
+
+                <div className='flex flex-col mt-4'>
+                  <h3 className='text-white py-1'><span className='text-gray-100 capitalize mr-1'>market cap rank:</span> {coinData.market_cap_rank}</h3>
+                  <h3 className='text-white py-1'><span className='text-gray-100 capitalize mr-1'>coinGecko rank:</span> {coinData.coingecko_rank}</h3>
+                  <h3 className='text-white py-1'><span className='text-gray-100 capitalize mr-1'>coinGecko score:</span> {coinData.coingecko_score}</h3>
+                </div>
+
+                <div className='absolute bottom-8 right-8 flex items-center'>
+                  <a className='text-lg px-1' target='_blank' href={coinData.links?.repos_url?.github[0]} rel='noreferrer'><GitHubIcon className='fill-cyan' /></a>
+
+                  <a className='text-lg px-1' target='_blank' href={`https://twitter.com/${coinData.links?.twitter_screen_name}`} rel='noreferrer'><TwitterIcon className='fill-cyan' /></a>
+
+                  <a className='text-lg px-1' target='_blank' href={coinData.links?.subreddit_url} rel='noreferrer'><RedditIcon className='fill-cyan' /></a>
+
+                  <a className='text-lg px-1' target='_blank' href={`https://facebook.com/${coinData.links?.twitter_screen_name}`} rel='noreferrer'><FacebookIcon className='fill-cyan' /></a>
+                </div>
               </div>
             </div>
           )
