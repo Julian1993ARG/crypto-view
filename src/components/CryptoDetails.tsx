@@ -3,7 +3,7 @@ import { useCryptoContext } from '@/context';
 import { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { useNavigate, useParams } from 'react-router-dom';
-import { SelectIcon } from './Icons';
+import { SelectIcon, Chart } from './';
 
 export default function CryptoDetails () {
   const { getCoinData, coinData, currency } = useCryptoContext();
@@ -57,7 +57,7 @@ export default function CryptoDetails () {
 
               </div>
               <div className='flex flex-col w-[55%] h-full pl-3 '>
-                right
+                <Chart coinId={coinId} />
               </div>
             </div>
           )

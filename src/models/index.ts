@@ -1,3 +1,4 @@
+export * from './chartData';
 export * from './coinData';
 export * from './cryptoData';
 export * from './cryptoQuery';
