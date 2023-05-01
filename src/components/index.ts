@@ -9,3 +9,4 @@ export { default as Search } from './Search';
 export { default as SetCurrency } from './SetCurrency';
 export { default as Spinner } from './Spinner';
 export { default as Table } from './Table';
+export { default as TrendigCard } from './TrendigCard';
