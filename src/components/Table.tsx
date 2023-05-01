@@ -1,9 +1,13 @@
-import { useCryptoContext } from '@/context';
-import { Pagination, SavedBtn } from '.';
+import { SavedBtn } from '.';
 import { Link } from 'react-router-dom';
+import { ICryptoData } from '@/models';
 
-export default function Table () {
-  const { cryptoData, currency } = useCryptoContext();
+type Props = {
+  cryptoData: ICryptoData[],
+  currency: string
+}
+
+export default function Table ({ cryptoData, currency }:Props) {
   return (
     <>
       <div className='flex flex-col mt-9 border border-gray-100 rounded '>
@@ -78,10 +82,7 @@ export default function Table () {
           </tbody>
         </table>
       </div>
-      <div className='flex items-center justify-between mt-4 capitalize h-[2rem]'>
-        <span>Data provided by <a className='text-cyan' href='https://www.coingecko.com/' target='_blank' rel='noreferrer'>CoinGecko</a></span>
-        <Pagination />
-      </div>
+
     </>
   );
 }

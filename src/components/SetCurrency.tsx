@@ -57,7 +57,7 @@ export default function SetCurrency () {
       >
         <label
           htmlFor='currency'
-          className='relative flex justify-center items-center mr-2 font-bold'
+          className='relative flex justify-center items-center mr-2 font-bold capitalize'
         >currency:
         </label>
         <input
@@ -76,7 +76,7 @@ export default function SetCurrency () {
       </form>
 
       <label htmlFor='sort' className='relative flex justify-center items-center'>
-        <span className='font-bold mr-2'>sort by: </span>
+        <span className='font-bold mr-2 capitalize'>sort by: </span>
         <select
           name='sort'
           id='sort'
