@@ -31,7 +31,7 @@ export const TrendingProvider = ({ children }:Props) => {
   }
 
   const resetTrendingResult = () => {
-    setCryptosData([]);
+    getCryptoData();
   };
 
   useLayoutEffect(() => {

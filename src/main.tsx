@@ -25,7 +25,13 @@ const router = createBrowserRouter([
         ]
       }, {
         path: Routes.trending,
-        element: <Trending />
+        element: <Trending />,
+        children: [
+          {
+            path: ':coinId',
+            element: <CryptoDetails />
+          }
+        ]
       }, {
         path: Routes.saved,
         element: <Saved />
