@@ -1,5 +1,5 @@
 import { useCryptoContext } from '@/context';
-import { StartIconSVG, Pagination } from '.';
+import { Pagination, SavedBtn } from '.';
 import { Link } from 'react-router-dom';
 
 export default function Table () {
@@ -15,9 +15,9 @@ export default function Table () {
               <th className='py-1'>price</th>
               <th className='py-1'>total volume</th>
               <th className='py-1'>market cap change</th>
-              <th className='py-1'>1H</th>
-              <th className='py-1'>24H</th>
-              <th className='py-1'>7D</th>
+              <th className='py-1 lg:table-cell hidden'>1H</th>
+              <th className='py-1 lg:table-cell hidden'>24H</th>
+              <th className='py-1 lg:table-cell hidden'>7D</th>
             </tr>
           </thead>
           <tbody>
@@ -25,9 +25,7 @@ export default function Table () {
             cryptoData.map((data) => (
               <tr key={data.id} className='text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-b-0'>
                 <td className='py-4 flex items-center uppercase'>
-                  <button className='outline-0 border-0 bg-none cursor-pointer'>
-                    <StartIconSVG className='w-[1.5rem] ml-1.5 fill-gray-100 hover:fill-cyan' />
-                  </button>
+                  <SavedBtn coinId={data.id} />
                   <img
                     src={data.image}
                     alt='coin image'
@@ -55,22 +53,22 @@ export default function Table () {
                 <td className='py-4'>{data.market_cap_change_percentage_24h}%</td>
                 <td className={
                   data.price_change_percentage_1h_in_currency > 0
-                    ? 'text-green py-4'
-                    : 'text-red py-4'
+                    ? 'text-green py-4 lg:table-cell hidden'
+                    : 'text-red py-4 lg:table-cell hidden'
                 }
                 >{Number(data.price_change_percentage_1h_in_currency).toFixed(2)}
                 </td>
                 <td className={
                   data.price_change_percentage_24h_in_currency > 0
-                    ? 'text-green py-4'
-                    : 'text-red py-4'
+                    ? 'text-green py-4 lg:table-cell hidden'
+                    : 'text-red py-4 lg:table-cell hidden'
                 }
                 >{Number(data.price_change_percentage_24h_in_currency).toFixed(2)}
                 </td>
                 <td className={
                   data.price_change_percentage_7d_in_currency > 0
-                    ? 'text-green py-4'
-                    : 'text-red py-4'
+                    ? 'text-green py-4 lg:table-cell hidden'
+                    : 'text-red py-4 lg:table-cell hidden'
                 }
                 >{Number(data.price_change_percentage_7d_in_currency).toFixed(2)}
                 </td>
