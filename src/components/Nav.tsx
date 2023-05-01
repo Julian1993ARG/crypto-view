@@ -9,7 +9,7 @@ export default function Nav () {
   ];
   return (
     <nav
-      className='w-[40%] mt-16 flex justify-around align-middle border border-cyan rounded-lg '
+      className='lg:w-[40%] sm:w-[80%] w-[90%] mt-20 lg:mt-16 sm:mt-24 flex justify-around align-middle border border-cyan sm:rounded-lg rounded-md '
     >
       {routes.map((route, index) => (
         <Navigation key={index} to={route.to} name={route.name} />
