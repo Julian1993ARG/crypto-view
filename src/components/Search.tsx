@@ -33,14 +33,14 @@ const SearchInput = ({ handleSearch }:Prop) => {
   return (
     <>
       <form
-        className='w-96 relative flex items-center ml-7 font-nunito '
+        className='xl:w-96 lg:w-60 w-full relative flex items-center  lg:ml-7  font-nunito '
         onSubmit={handleSubmit}
       >
         <input
           type='text'
           name='search'
-          className='w-full rounded bg-gray-200 placeholder:text-gray-100 pl-2 outline-0 border
-      focus:border-cyan '
+          className='w-full rounded bg-gray-200 placeholder:text-gray-100 pl-2 placeholder:text-base required outline-0
+          border border-transparent focus:border-cyan '
           placeholder='Search here...'
           value={searchText}
           onChange={handleInput}

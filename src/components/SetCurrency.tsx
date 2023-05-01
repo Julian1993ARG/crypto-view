@@ -50,21 +50,21 @@ export default function SetCurrency () {
   };
 
   return (
-    <div className='flex mr-7'>
+    <div className='flex lg:mr-7 justify-between mt-4 lg:mt-0 sm:flex-row flex-col relative'>
       <form
-        className='relative flex items-center font-nunito mr-12'
+        className='relative flex items-center font-nunito md:mr-12 mr-1'
         onSubmit={handleSubmit}
       >
         <label
           htmlFor='currency'
-          className='relative flex justify-center items-center mr-2 font-bold capitalize'
+          className='mr-2  sm:text-base text-sm sm:font-bold font-medium'
         >currency:
         </label>
         <input
           type='text'
           name='currency'
           placeholder='usd'
-          className='w-16 rounded bg-gray-200 placeholder:text-gray-100 pl-2  outline-0 border focus:border-cyan leading-4 '
+          className='w-16 rounded bg-gray-200 placeholder:text-gray-100  placeholder:text-base required outline-0  border border-transparent focus:border-cyan leading-4  sm:text-base text-sm sm:p-0 sm:pl-2 p-1 '
         />
         <button
           className='ml-1 cursor-pointer'
@@ -75,12 +75,12 @@ export default function SetCurrency () {
 
       </form>
 
-      <label htmlFor='sort' className='relative flex justify-center items-center'>
-        <span className='font-bold mr-2 capitalize'>sort by: </span>
+      <label htmlFor='sort' className='relative flex sm:justify-center justify-start items-center mt-4 sm:mt-0'>
+        <span className='mr-2 sm:font-bold font-medium sm:text-base text-sm w-16'>sort by: </span>
         <select
           name='sort'
           id='sort'
-          className='rounded bg-gray-200 text-base pl-2 pr-10 py-0.5 leading-4 capitalize focus:outline-0 '
+          className='rounded bg-gray-200 sm:text-base text-sm pl-2 pr-10 py-1.5 focus:outline-0 text-transparent appearance-none capitalize leading-4 w-full sm:w-48 '
           onChange={handleSort}
         >
           {optionSorts.map((option, index) => (
@@ -93,7 +93,7 @@ export default function SetCurrency () {
           className='w-[1rem] h-auto absolute right-1 top-2 pointer-events-none'
         />
       </label>
-      <button className='w-[2rem] ml-4 hover:scale-110 transition-all relative right-0 top-0' onClick={resetFunction}>
+      <button className='w-[2rem] ml-4 hover:scale-110 transition-all transition-ease absolute right-0 top-0 sm:relative ' onClick={resetFunction}>
         <ResetIcon className='w-full h-full fill-cyan' />
       </button>
 
