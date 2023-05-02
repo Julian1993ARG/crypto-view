@@ -59,7 +59,7 @@ const SearchInput = ({ handleSearch }:Prop) => {
       </form>
       {
     searchText.length > 0
-      ? <ul className='absolute top-11 right-0 w-96 h-96 rounded overflow-x-hidden py-2 bg-gray-200 bg-opacity-60 backdrop-blur-md scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-200 '>
+      ? <ul className='absolute top-11 right-0 lg:w-60 xs:w-96 w-full bg-gray-200 rounded overflow-x-hidden  py-2  backdrop-filter backdrop-blur-md bg-opacity-60  scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-200  z-10 h-96 '>
         {
           searchData.length > 0
             ? searchData.map((coin) => (
