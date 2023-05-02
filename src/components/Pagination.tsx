@@ -17,7 +17,7 @@ const PerPage = () => {
   };
   return (
     <form
-      className='relative flex items-center font-nunito mr-12'
+      className='relative flex items-center font-nunito sm:mr-12'
       onSubmit={handleSubmit}
     >
       <label
@@ -68,7 +68,7 @@ export default function Pagination () {
     else setCurrentPage(currentPage - 3);
   };
   return (
-    <div className={`flex items-center ${cryptoData.length < perPage && 'hidden'}`}>
+    <div className={`flex md:flex-row flex-col items-center md:mt-0 mt-4  ${cryptoData.length < perPage && 'hidden'}`}>
       <PerPage />
       <ul className='flex items-center justify-end text-sm'>
         <li className='flex items-center'>

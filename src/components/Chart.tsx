@@ -42,14 +42,14 @@ export default function Chart ({ coinId }: {coinId: string | undefined}) {
   return (
     <div className='w-full h-[60%]'>
       <ChartComponent chartData={coinData} currency={currency} type={type} />
-      <div className='flex '>
-        <button className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${type === 'prices' ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'} `} onClick={() => setType('prices')}>Price</button>
-        <button className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${type === 'market_caps' ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setType('market_caps')}>market caps</button>
-        <button className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${type === 'total_volumes' ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setType('total_volumes')}>total volumes</button>
+      <div className='flex md:flex-nowrap flex-wrap '>
+        <button className={`rounded-md text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${type === 'prices' ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'} `} onClick={() => setType('prices')}>Price</button>
+        <button className={`rounded-md text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${type === 'market_caps' ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setType('market_caps')}>market caps</button>
+        <button className={`rounded-md text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${type === 'total_volumes' ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setType('total_volumes')}>total volumes</button>
 
-        <button className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${days === 7 ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setDays(7)}>7d</button>
-        <button className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${days === 14 ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setDays(14)}>14d</button>
-        <button className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${days === 30 ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setDays(30)}>30d</button>
+        <button className={`rounded-md text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${days === 7 ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setDays(7)}>7d</button>
+        <button className={`rounded-md text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${days === 14 ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setDays(14)}>14d</button>
+        <button className={`rounded-md text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 capitalize ${days === 30 ? 'bg-cyan text-cyan' : 'bg-gray-200 text-gray-100'}`} onClick={() => setDays(30)}>30d</button>
 
       </div>
     </div>
