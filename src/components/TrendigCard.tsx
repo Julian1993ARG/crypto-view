@@ -9,7 +9,7 @@ export default function TrendiCard ({ crypto }:{crypto:Item}) {
   };
   return (
     <div
-      className='w-[40%] bg-gray-200 mb-12 last:mb-0 rounded-lg p-4 relative cursor-pointer hover:bg-gray-100 hover:bg-opacity-40'
+      className='lg:w-[40%] sm:w-[60%] w-[80%] bg-gray-200 mb-12 last:mb-0 rounded-lg p-4 relative cursor-pointer hover:bg-gray-100 hover:bg-opacity-40'
       onClick={() => handleClick(crypto.id)}
     >
       <h3 className='text-base flex items-center my-0.5'>
@@ -48,7 +48,7 @@ export default function TrendiCard ({ crypto }:{crypto:Item}) {
       <img
         src={crypto.large}
         alt='coin image'
-        className='w-[35%] h-auto rounded-full absolute top-2/4 -right-12 -translate-y-2/4 '
+        className='absolute lg:top-2/4 top-4 lg:-right-12 -right-6 -translate-y-2/4  lg:w-[35%] w-[5rem]   h-auto rounded-full'
       />
     </div>
   );
